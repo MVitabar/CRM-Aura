@@ -10,6 +10,7 @@ interface SideBarProps {
   setCurrentView: (view: string) => void; // Nueva prop para cambiar la vista
   isOpen: boolean; // New prop to track sidebar's visibility
   toggleSidebar: () => void; // New prop to toggle sidebar's visibility
+  className: string; // New prop to add custom class names
 }
 
 const SideBar: React.FC<SideBarProps> = ({

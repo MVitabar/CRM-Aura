@@ -15,6 +15,10 @@ function App() {
           path="/statistics"
           element={<ProductsContainer children={undefined} />}
         ></Route>
+        <Route
+          path="/events"
+          element={<ProductsContainer children={undefined} />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );
