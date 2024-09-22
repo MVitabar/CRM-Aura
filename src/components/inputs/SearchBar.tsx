@@ -3,7 +3,7 @@ import React from "react";
 const SearchBar: React.FC = () => {
   return (
     <div className="flex p-2 items-center justify-between border-gray-400 border-solid border-2 px-3 w-full max-w-4xl">
-      <h1 className="sm:text-xs text-2xl font-bold ">Tus productos</h1>
+      <h1 className="sm:text-base md:text-3xl font-bold ">Tus productos</h1>
       <div className="flex w-7/12 justify-end py-2">
         <input
           type="text"

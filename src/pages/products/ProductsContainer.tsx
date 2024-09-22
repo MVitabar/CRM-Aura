@@ -57,7 +57,7 @@ const ProductsContainer: React.FC<ProductContainerProps> = () => {
         />
 
         <main
-          className={`flex flex-col w-full p-4 bg-gray-100 justify-center items-center overflow-y-auto transition-all duration-300 
+          className={`flex flex-col w-full   bg-gray-100 justify-center items-center overflow-y-auto transition-all duration-300 
            md:pl-64  
           `}
         >

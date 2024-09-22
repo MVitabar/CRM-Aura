@@ -218,10 +218,13 @@ function ProductForm() {
           {/* Vista Previa */}
 
           <div className="bg-white rounded-lg shadow-md w-full md:w-6/12 max-h-[600px] overflow-hidden">
-            <div>
+            <div className="flex flex-col justify-center items-center">
               <div className="flex  h-full bg-gray-200 text-black items-center justify-center rounded-lg overflow-hidden shadow-lg">
-                <div className="flex flex-col w-full md:w-60 lg:w-60 justify-center">
-                  <label htmlFor="image-upload" className="cursor-pointer">
+                <div className="flex flex-col w-full md:w-60 lg:w-60 items-center justify-center">
+                  <label
+                    htmlFor="image-upload"
+                    className="cursor-pointer items-center justify-center"
+                  >
                     {images.length > 0 ? (
                       <img
                         src={images[currentImageIndex]}
@@ -239,22 +242,22 @@ function ProductForm() {
                     )}
                   </label>
                   {images.length > 0 && (
-                    <div className="flex justify-between z-10 relative -top-28 transform -translate-y-1/2 ">
+                    <div className="flex justify-between z-10 relative -top-36 transform -translate-y-1/2 ">
                       <div className="flex items-center ">
-                        <PrimaryButton
-                          className="flex w-6 px-0 py-0  rounded-full items-center justify-center"
+                        <button
+                          className="flex w-8 h-8 rounded-full items-center justify-center bg-black bg-opacity-30 text-white"
                           onClick={prevImage}
                         >
                           <ChevronLeftIcon className="w-6 h-6" />
-                        </PrimaryButton>
+                        </button>
                       </div>
                       <div>
-                        <PrimaryButton
-                          className="flex w-6 px-0 py-0 rounded-full items-center justify-center"
+                        <button
+                          className="flex w-8 h-8 rounded-full items-center justify-center bg-black bg-opacity-30 text-white"
                           onClick={nextImage}
                         >
                           <ChevronRightIcon className="w-6 h-6" />
-                        </PrimaryButton>
+                        </button>
                       </div>
                     </div>
                   )}

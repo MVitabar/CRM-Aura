@@ -1,22 +1,18 @@
 import React from "react";
 import ProductBanner from "../banners/ProductBanner";
-import SearchBar from "../inputs/SearchBar";
 import { useProductContext } from "../../hooks/useProductContext";
 import capaProductosVacio from "../../assets/Capa-productos-vacio.png";
+import SearchBar from "../inputs/SearchBar";
 
 const ProductList: React.FC = () => {
   const { products } = useProductContext();
 
-  const calculateDiscountedPrice = (price: number, discount: number) => {
-    return price * (1 - discount / 100);
-  };
-
   return (
-    <div className="container mx-auto py-4 flex flex-col items-center justify-center  w-full  overflow-y-auto">
-      <div className="flex flex-col justify-between items-center mb-4 w-full">
+    <div className=" mx-auto pt-2 flex flex-col  items-center mt-20 h-screen w-full  overflow-y-scroll">
+      <div className="flex flex-col justify-between items-center w-full">
         <SearchBar />
       </div>
-      <div className="flex w-full justify-center items-center">
+      <div className="flex flex-col w-11/12  justify-center items-center">
         {products.length === 0 ? (
           <div>
             <img
@@ -35,10 +31,6 @@ const ProductList: React.FC = () => {
               image={product.images[0] || ""}
               title={product.title}
               originalPrice={Number(product.price)}
-              currentPrice={calculateDiscountedPrice(
-                Number(product.price),
-                Number(product.discount)
-              )}
             />
           ))
         )}
