@@ -6,6 +6,7 @@ import ProductList from "../../components/lists/ProductList";
 import Header from "../../components/header/Header";
 import Statistics from "../../views/statistics/StatisticsContainer";
 import EventManager from "../../views/eventManager/EventManagerContainer";
+import ProductEdit from "../../components/forms/ProductEdit";
 
 interface ProductContainerProps {
   children: React.ReactNode;
@@ -27,6 +28,8 @@ const ProductsContainer: React.FC<ProductContainerProps> = () => {
         return <Statistics />;
       case "events":
         return <EventManager />;
+      case "edit-product":
+        return <ProductEdit />;
       default:
         return <ProductForm />;
     }

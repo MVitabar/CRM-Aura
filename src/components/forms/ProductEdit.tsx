@@ -1,83 +1,119 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import {
   PhotoIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 import PrimaryButton from "../buttons/PrimaryButton";
-// import { useProductContext } from "../../hooks/useProductContext";
+import { useProductContext } from "../../hooks/useProductContext";
+import { useParams } from "react-router-dom";
 
-function ProductForm() {
-  const [product, setProduct] = useState({});
-  // const { addProduct } = useProductContext();
-  // const [images, setImages] = useState<string[]>([]);
-  // const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  // const [showFullDescription, setShowFullDescription] = useState(false);
+function ProductEdit() {
+  const { addProduct, updateProduct, getProductById } = useProductContext();
+  const { id } = useParams<{ id: string }>();
+
+  const [product, setProduct] = useState({
+    title: "",
+    description: "",
+    price: "",
+    state: "",
+    category: "",
+    freeShipping: "",
+  });
+  const [images, setImages] = useState<string[]>([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
+  useEffect(() => {
+    if (id) {
+      const existingProduct = getProductById(id);
+      let copyPrice: number;
+
+      if (typeof existingProduct?.price === "string") {
+        copyPrice = parseFloat(existingProduct.price);
+      } else {
+        copyPrice = existingProduct.price;
+      }
+
+      // if (existingProduct) {
+      //   setProduct({
+      //     title: existingProduct.title,
+      //     description: existingProduct.description,
+      //     price: typeof existingProduct.price === "string"
+      //         ? parseFloat(existingProduct.price)
+      //         : existingProduct.price.toString(),
+      //     state: existingProduct.state,
+      //     category: existingProduct.category,
+      //     freeShipping: existingProduct.freeShipping,
+      //   });
+      //   setImages(existingProduct.images || []);
+      // }
+    }
+  }, [id, getProductById]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
-    const { type, name, value } = e.target;
-
-    let valueNumber;
-    if (type === "number") {
-      valueNumber = parseFloat(value);
-    }
-
-    setProduct({
-      ...product,
-      [name]: valueNumber,
-    });
+    const { name, value } = e.target;
+    setProduct((prev) => ({
+      ...prev,
+      [name]: name === "price" ? parseFloat(value) || 0 : value,
+    }));
   };
 
-  // const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files) {
-  //     const newImages = Array.from(e.target.files).map((file) =>
-  //       URL.createObjectURL(file)
-  //     );
-  //     setImages((prevImages) => [...prevImages, ...newImages]);
-  //   }
-  // };
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const newImages = Array.from(e.target.files).map((file) =>
+        URL.createObjectURL(file)
+      );
+      setImages((prevImages) => [...prevImages, ...newImages]);
+    }
+  };
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   const newProduct = {
-  //     ...product,
-  //     images: images,
-  //     price: product.price.toString(),
-  //   };
-  //   addProduct(newProduct);
-  //   // Resetear el formulario
-  //   setProduct({
-  //     title: "",
-  //     description: "",
-  //     price: 0,
-  //     state: "",
-  //     category: "",
-  //     freeShipping: "",
-  //   });
-  //   setImages([]);
-  //   setCurrentImageIndex(0);
-  // };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const updatedProduct = {
+      id: id || uuidv4(),
+      ...product,
+      images,
+      price: product.price.toString(),
+    };
+    if (id) {
+      updateProduct(product, updatedProduct); // Usar la función de actualización
+    } else {
+      addProduct(updatedProduct); // Usar esta línea solo si se está creando un nuevo producto
+    }
+    // Resetear el formulario
+    setProduct({
+      title: "",
+      description: "",
+      price: "",
+      state: "",
+      category: "",
+      freeShipping: "",
+    });
+    setImages([]);
+    setCurrentImageIndex(0);
+  };
 
-  // const toggleDescription = () => {
-  //   setShowFullDescription(!showFullDescription);
-  // };
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
 
-  // const nextImage = () => {
-  //   // setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  // };
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
 
-  // const prevImage = () => {
-  //   // setCurrentImageIndex(
-  //   //   (prevIndex) => (prevIndex - 1 + images.length) % images.length
-  //   // );
-  // };
+  const prevImage = () => {
+    setCurrentImageIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
+  };
 
   return (
     <>
       <div className="w-full bg-white p-4 rounded-lg shadow-md h-auto mt-16 overflow-y-auto">
-        <h2 className="text-2xl font-bold mb-6">Añadir Producto</h2>
+        <h2 className="text-2xl font-bold mb-6">Editar Producto</h2>
         <div className="flex flex-col md:flex-row">
           <div className="bg-white p-6 rounded-lg shadow-md w-full md:w-6/12 max-h-[600px] overflow-hidden mb-6 md:mb-0">
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -330,4 +366,4 @@ function ProductForm() {
   );
 }
 
-export default ProductForm;
+export default ProductEdit;

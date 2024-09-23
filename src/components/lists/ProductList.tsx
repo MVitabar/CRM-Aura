@@ -8,11 +8,11 @@ const ProductList: React.FC = () => {
   const { products } = useProductContext();
 
   return (
-    <div className=" mx-auto pt-2 flex flex-col  items-center mt-20 h-screen w-full  overflow-y-scroll">
+    <div className="mx-auto pt-2 flex flex-col items-center mt-20 w-full overflow-y-scroll">
       <div className="flex flex-col justify-between items-center w-full">
         <SearchBar />
       </div>
-      <div className="flex flex-col w-11/12  justify-center items-center">
+      <div className="flex flex-col w-11/12 justify-center items-center">
         {products.length === 0 ? (
           <div>
             <img
@@ -28,9 +28,14 @@ const ProductList: React.FC = () => {
           products.map((product) => (
             <ProductBanner
               key={product.id}
-              image={product.images[0] || ""}
+              image={
+                product.images.length > 0
+                  ? product.images[0]
+                  : capaProductosVacio
+              }
               title={product.title}
-              originalPrice={Number(product.price)}
+              originalPrice={product.price} // Passando como number
+              id={""}
             />
           ))
         )}

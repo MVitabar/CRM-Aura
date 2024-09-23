@@ -1,0 +1,66 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "title": "Camiseta Blanca",
+      "description": "Camiseta blanca de algodón, suave y cómoda.",
+      "price": "19.99",
+      "state": "nuevo",
+      "category": "camisetas",
+      "freeShipping": "true",
+      "images": [
+        "/images/camiseta-blanca-1.jpg",
+        "/images/camiseta-blanca-2.jpg"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Pantalones Vaqueros",
+      "description": "Pantalones vaqueros clásicos para uso diario.",
+      "price": "49.99",
+      "state": "usado",
+      "category": "pantalones",
+      "freeShipping": "false",
+      "images": [
+        "/images/pantalones-vaqueros-1.jpg",
+        "/images/pantalones-vaqueros-2.jpg"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Vestido de Verano",
+      "description": "Vestido ligero ideal para días de calor.",
+      "price": "29.99",
+      "state": "nuevo",
+      "category": "vestidos",
+      "freeShipping": "true",
+      "images": ["/images/vestido-verano-1.jpg", "/images/vestido-verano-2.jpg"]
+    },
+    {
+      "id": "4",
+      "title": "Zapatos Deportivos Hombre",
+      "description": "Zapatos deportivos para correr, cómodos y ligeros.",
+      "price": "59.99",
+      "state": "nuevo",
+      "category": "calzado masculino",
+      "freeShipping": "true",
+      "images": [
+        "/images/zapatos-deportivos-hombre-1.jpg",
+        "/images/zapatos-deportivos-hombre-2.jpg"
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Zapatos de Tacón Mujer",
+      "description": "Elegantes zapatos de tacón para ocasiones especiales.",
+      "price": "79.99",
+      "state": "nuevo",
+      "category": "calzado femenino",
+      "freeShipping": "false",
+      "images": [
+        "/images/zapatos-tacon-mujer-1.jpg",
+        "/images/zapatos-tacon-mujer-2.jpg"
+      ]
+    }
+  ]
+}
